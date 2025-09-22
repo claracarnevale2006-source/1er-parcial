@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1889937739618484075}
   - component: {fileID: 2402751449194322866}
   - component: {fileID: 4429754224740466204}
-  - component: {fileID: 4325172725273710676}
   m_Layer: 0
   m_Name: Cofre
   m_TagString: Untagged
@@ -76,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1366874437
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -1741403534410518345, guid: ac402bcbcab70ce46b0d4ce4548545f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -135,19 +134,3 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4325172725273710676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1322468798285624316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 045c9244f5d47a3408d949bd2989ca61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpriteOn: {fileID: -3144940818293873539, guid: ac402bcbcab70ce46b0d4ce4548545f0, type: 3}
-  SpriteOff: {fileID: -1741403534410518345, guid: ac402bcbcab70ce46b0d4ce4548545f0, type: 3}
-  InteracAction: {fileID: 1781555164194001046, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  isOn: 0

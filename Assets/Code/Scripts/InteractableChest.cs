@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CofreInteractuable : MonoBehaviour
+public class InteractableChest : MonoBehaviour
 {
     [SerializeField] private Sprite SpriteOn;
     [SerializeField] private Sprite SpriteOff;
@@ -31,12 +31,11 @@ public class CofreInteractuable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.CompareTag("Player"))
         {
             playerInRange = true;
         }
-        Debug.Log("Is close");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -46,12 +45,11 @@ public class CofreInteractuable : MonoBehaviour
         {
             playerInRange = false;
         }
-        Debug.Log("Is not close");
     }
 
     private void HandleInteractInput(InputAction.CallbackContext context)
-    {  
-       
+    {
+
         if (playerInRange && context.performed)
         {
             isOn = !isOn;
@@ -64,6 +62,5 @@ public class CofreInteractuable : MonoBehaviour
                 spriteRenderer.sprite = SpriteOff;
             }
         }
-        Debug.Log("Interact input received");
     }
 }
