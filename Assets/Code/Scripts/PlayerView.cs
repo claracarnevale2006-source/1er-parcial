@@ -7,80 +7,58 @@ public class PlayerView : MonoBehaviour
     private Animator playerAnimator;
     private SpriteRenderer playerSpriteRenderer;
 
-    bool isWalking;
-    bool isJumping;
-    bool isFalling;
+    private bool isJumping = false;
+    private bool wasGrounded = true;
     private float playerSpeed;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
-      playerRB = GetComponent<Rigidbody2D>();
-      playerAnimator = GetComponent<Animator>();
-      playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerRB = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponent<Animator>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-       playerSpeed = Mathf.Abs(playerRB.linearVelocity.x);
-        CheckMovement();
-        ControlAnimations();    
+        playerSpeed = Mathf.Abs(playerRB.linearVelocity.x);
+        UpdateAnimations();
         FlipSprite();
     }
 
-    void CheckMovement()
+    void UpdateAnimations()
     {
-        if (playerMovement.isGrounded)
+        // Detectar cuando INICIA el salto (deja el suelo)
+        if (!isJumping && !playerMovement.isGrounded && wasGrounded)
         {
-            if(playerSpeed > 0)
-            {
-                isWalking = true;
-            }
-            else
-            {
-                isWalking = false;
-            }
-            
-        }
-        else
-        {
-            if(playerRB.linearVelocity.y > 0)
-            {
-                playerAnimator.SetBool("isJumping", true);
-                playerAnimator.SetBool("isFalling", false);
-            }
-            else if(playerRB.linearVelocity.y < 0)
-            {
-                playerAnimator.SetBool("isJumping", false);
-                playerAnimator.SetBool("isFalling", true);
-            }
-            else
-            {
-                playerAnimator.SetBool("isJumping", false);
-                playerAnimator.SetBool("isFalling", false);
-            }
-        }
-    }
-
-    void ControlAnimations()
-    {
-        if(isWalking)
-        {
-            playerAnimator.SetBool("isWalking", true);
-        }
-        else
-        {
+            isJumping = true;
+            playerAnimator.SetBool("isJumping", true);
             playerAnimator.SetBool("isWalking", false);
         }
+
+        // Detectar cuando TERMINA el salto (vuelve al suelo)
+        if (isJumping && playerMovement.isGrounded)
+        {
+            isJumping = false;
+            playerAnimator.SetBool("isJumping", false);
+        }
+
+        // Control de walking/idle solo cuando está en el suelo y no saltando
+        if (playerMovement.isGrounded && !isJumping)
+        {
+            playerAnimator.SetBool("isWalking", playerSpeed > 0.1f);
+        }
+
+        // Guardar el estado actual para el próximo frame
+        wasGrounded = playerMovement.isGrounded;
     }
 
     void FlipSprite()
     {
-        if(playerRB.linearVelocity.x > 0)
+        if (playerRB.linearVelocity.x > 0.1f)
         {
             playerSpriteRenderer.flipX = false;
         }
-        else if(playerRB.linearVelocity.x < 0)
+        else if (playerRB.linearVelocity.x < -0.1f)
         {
             playerSpriteRenderer.flipX = true;
         }

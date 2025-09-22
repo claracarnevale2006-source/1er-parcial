@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputActionReference MoveInput;
@@ -16,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f; //move in frames
     private Vector2 horizontalMovement;
     public bool isGrounded;
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -60,3 +60,5 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
+
