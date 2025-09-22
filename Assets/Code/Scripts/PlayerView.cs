@@ -27,7 +27,7 @@ public class PlayerView : MonoBehaviour
 
     void UpdateAnimations()
     {
-        // Detectar cuando INICIA el salto (deja el suelo)
+        //Detects when the jump starts and the player leaves the ground
         if (!isJumping && !playerMovement.isGrounded && wasGrounded)
         {
             isJumping = true;
@@ -35,20 +35,20 @@ public class PlayerView : MonoBehaviour
             playerAnimator.SetBool("isWalking", false);
         }
 
-        // Detectar cuando TERMINA el salto (vuelve al suelo)
+        //Detects when the jump finishes and the player goes back to the ground
         if (isJumping && playerMovement.isGrounded)
         {
             isJumping = false;
             playerAnimator.SetBool("isJumping", false);
         }
 
-        // Control de walking/idle solo cuando está en el suelo y no saltando
+        //Walking/idle control when the player is in the ground and not jumping
         if (playerMovement.isGrounded && !isJumping)
         {
             playerAnimator.SetBool("isWalking", playerSpeed > 0.1f);
         }
 
-        // Guardar el estado actual para el próximo frame
+        //Saves the actual state for the next frame
         wasGrounded = playerMovement.isGrounded;
     }
 
